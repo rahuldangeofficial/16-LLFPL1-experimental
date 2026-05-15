@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Iinclude
-SRC = src/main.c src/vcl.c src/vec.c
+SRC = src/main.c src/vcl.c src/vec.c src/registry.c
 OBJ = $(SRC:.c=.o)
 TARGET = llfpl1
 

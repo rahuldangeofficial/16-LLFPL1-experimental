@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - -Iinclude
+    - -D_POSIX_C_SOURCE=200112L
