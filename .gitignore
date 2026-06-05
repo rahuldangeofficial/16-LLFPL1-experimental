@@ -53,3 +53,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Custom project files
+.cache/
+.vscode/
+compile_commands.json
+llfpl1
