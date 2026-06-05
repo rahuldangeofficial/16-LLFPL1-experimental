@@ -5,7 +5,7 @@ OBJ = $(SRC:.c=.o)
 DEP = $(OBJ:.o=.d)
 TARGET = llfpl1
 
-FILE ?= tests/baseline.lp
+FILE ?= tests/baseline.LLFPL1
 
 all: $(TARGET)
 
