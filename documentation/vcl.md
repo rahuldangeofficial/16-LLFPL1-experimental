@@ -31,7 +31,7 @@ VCL is the hardware discovery layer for the LLFPL1 interpreter. It probes the
 host system at boot to produce a `HardwareProfile` — a snapshot of the two
 physical parameters that all downstream subsystems depend on:
 
-- **`physical_regs`** — number of vector registers the execution engine virtualises
+- **`virtual_regs`** — number of vector registers the execution engine virtualises
 - **`cache_line_size`** — the alignment boundary for all cache-sensitive allocations
 
 These values flow through the entire system:
@@ -116,7 +116,7 @@ instead of `CPUID`. This is correct because:
 ```
 Offset  Size  Field            Type
 ──────  ────  ──────────────── ─────────
- 0       2    physical_regs    uint16_t
+ 0       2    virtual_regs     uint16_t
  2       2    cache_line_size  uint16_t
 ──────  ────
         4     TOTAL — zero padding bytes
@@ -437,7 +437,7 @@ The probe logic could live directly inside `vcl_discover`. Separating it:
 2. Allows testing the probe in isolation (in a future test harness)
 3. Keeps the `#if`/`#elif` preprocessor maze out of the public-facing function
 
-### 11.2 — `physical_regs = 16` Is Hardcoded, Not Probed
+### 11.2 — `virtual_regs = 16` Is Hardcoded, Not Probed
 
 The number 16 is the register count of the *virtual machine*, not the host CPU.
 On x86_64, there are 16 GPRs (RAX-R15). On ARM64, there are 31 GPRs (X0-X30)
@@ -510,7 +510,7 @@ This was empirically confirmed:
 | Cascading `#if`/`#elif` dispatch   | Zero runtime branching overhead         | Only one tier compiled per binary        |
 | Power-of-two validation guard      | Guarantees `posix_memalign` safety      | Rejects exotic (valid but non-pow2) sizes|
 | Default 64-byte fallback           | Safe on 95%+ of hardware                | Under-aligned on Apple Silicon if probe fails |
-| Hardcoded `physical_regs = 16`     | Simple, deterministic VM design         | Not adaptive to ARM64's 31 GPRs          |
+| Hardcoded `virtual_regs = 16`     | Simple, deterministic VM design         | Not adaptive to ARM64's 31 GPRs          |
 | Return by value (4 bytes)          | No heap, no ownership, no lifetime      | Struct copied on return (trivial cost)   |
 | `(void)` function signatures       | C11 correct, compiler-enforced safety   | Slightly more verbose declarations       |
 | `static` helper functions          | Full encapsulation in `vcl.c`           | Cannot be called from test files directly|

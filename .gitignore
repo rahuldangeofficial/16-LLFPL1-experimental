@@ -59,3 +59,9 @@ dkms.conf
 .vscode/
 compile_commands.json
 llfpl1
+
+# macOS
+.DS_Store
+
+# IDEs
+.idea/

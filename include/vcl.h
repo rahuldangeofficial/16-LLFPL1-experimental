@@ -15,7 +15,7 @@
 /* ── Hardware limits ───────────────────────────────────────────── */
 
 typedef struct {
-    uint16_t physical_regs;     /* Virtualized register count  */
+    uint16_t virtual_regs;      /* Virtualized register count  */
     uint16_t cache_line_size;   /* Byte alignment boundary     */
 } HardwareProfile;
 
