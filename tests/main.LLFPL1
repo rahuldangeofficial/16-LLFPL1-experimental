@@ -1,9 +1,6 @@
--- LLFPL1 Structural Test Core
+-- LLFPL1 Full Architecture Test
 Identity(Base_Offset, 100)
 
-Identity(Gravity, 9.81)
-
--- Nested Evaluation Verification
 Map(Calculate, x, plus(x, Base_Offset))
 
 Commit(Calculate(50.5))

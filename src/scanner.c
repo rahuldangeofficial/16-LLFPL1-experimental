@@ -112,3 +112,16 @@ Atom scanner_next(Scanner* s) {
 
     return make_atom(s, ATOM_ERROR, 1);
 }
+
+Atom scanner_peek(Scanner* s) {
+    Scanner temp = *s;   /* Stack copy — only legal inside scanner.c */
+    return scanner_next(&temp);
+}
+
+Scanner* scanner_clone(Scanner* s) {
+    if (!s) return NULL;
+    Scanner* clone = malloc(sizeof(*clone));
+    if (!clone) return NULL;
+    *clone = *s;         /* Bitwise copy of the coordinate state */
+    return clone;
+}

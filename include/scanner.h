@@ -43,5 +43,7 @@ Scanner* scanner_create (const char* source);
 void     scanner_destroy(Scanner* s);
 
 Atom     scanner_next   (Scanner* s);
+Atom     scanner_peek   (Scanner* s);
+Scanner* scanner_clone  (Scanner* s);
 
 #endif /* SCANNER_H */
